@@ -3,7 +3,10 @@ import PokemonType from '../interfaces/PokemonType';
 import PokemonTypeBase from '../interfaces/PokemonTypeBase';
 import PokemonTypeModel from '../models/PokemonTypeModel';
 
+axios.defaults.baseURL = 'https://pokeapi.co/api/v2';
+
 export default class PokemonTypeApi {
+
   static async getAllPokemonTypes(): Promise<PokemonTypeModel[]> {
     try {
       const response = await axios.get('/type');
@@ -15,13 +18,29 @@ export default class PokemonTypeApi {
 
       return pokemonTypes;
     } catch(ex) {
-      throw new Error('Something wrong happened.');
+      throw new Error('Something wrong happened in getAllPokemonTypes');
     }
   }
 
-  static async getPokemonTypeFromUrl(url: string) : Promise<PokemonType> {
-    const response = await axios.get(url);
+  static async getPokemonType(type: string): Promise<PokemonTypeModel> {
+    try {
+      const response = await axios.get(`/type/${type}/`);
+      const pokemonType: PokemonType = response.data;
+      const pokemonTypeModel = new PokemonTypeModel(pokemonType);
 
-    return response.data;
+      return pokemonTypeModel;
+    } catch(ex) {
+      throw new Error('Something wrong happened in getPokemonType');
+    }
   }
+
+  private static async getPokemonTypeFromUrl(url: string) : Promise<PokemonType> {
+    try {
+      const response = await axios.get(url);
+      return response.data;    
+    } catch (error) {
+      throw new Error('Api call failed')
+    }
+  }
+
 }

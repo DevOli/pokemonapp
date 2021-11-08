@@ -16,7 +16,8 @@
       "program": "${workspaceFolder}/src/index.ts",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
-      ]
+      ],
+      "args": ["fire"]
     }
   ]
 }

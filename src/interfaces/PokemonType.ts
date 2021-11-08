@@ -62,13 +62,13 @@ export interface Name {
   name: string;
 }
 
-export interface Pokemon2 {
+export interface PokemonBase {
   name: string;
   url: string;
 }
 
 export interface Pokemon {
-  pokemon: Pokemon2;
+  pokemon: PokemonBase;
   slot: number;
 }
 
