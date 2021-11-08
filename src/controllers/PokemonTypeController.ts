@@ -1,4 +1,4 @@
-import PokemonTypeApi from '../api/PokemonTypeApi';
+import PokemonTypeApi from '../api/PokemonApi';
 
 export default class PokemonTypeController {
 
@@ -13,18 +13,15 @@ export default class PokemonTypeController {
     }
   }
 
-  static async showPokemonType(type: string) : Promise<void> {
+  static async showPokemonType(type: string) : Promise<string> {
     try {
       const pokemonType = await PokemonTypeApi.getPokemonType(type);
-      console.log(`${pokemonType}`)
-    } catch (ex: any) {
+      console.log(`${pokemonType}`);
+      return pokemonType.getRandomPokemonName();
+    } catch (ex: any) {    
       console.log(ex.message);
+      throw new Error('Something wrong happened in getPokemonType');
     }
   }
-
-  static showPokemonTypeSync(type: string){      
-    PokemonTypeApi.getPokemonType(type)
-      .then((pokemonType) => console.log(`${pokemonType}`))
-      .catch(error => console.error(error));
-  }
+  
 }
