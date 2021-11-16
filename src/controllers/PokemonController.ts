@@ -8,9 +8,9 @@ export default class PokemonController {
   static async showAllPokemon () : Promise<PokemonModel[]> {
     try {
       const pokemonTypes = await PokemonApi.getAll<PokemonModel, Pokemon>("pokemon", PokemonModel);
-      pokemonTypes.forEach(p => {
-        console.log(`${p}`);
-      });
+      // pokemonTypes.forEach(p => {
+      //   console.log(`${p}`);
+      // });
       return pokemonTypes
     } catch (ex: any) {
       console.log(ex.message);

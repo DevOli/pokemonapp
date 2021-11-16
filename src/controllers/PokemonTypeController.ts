@@ -9,9 +9,9 @@ export default class PokemonTypeController {
   static async showAllPokemonTypes () : Promise<PokemonTypeModel[]> {
     try {
       const pokemonTypes = await PokemonApi.getAll<PokemonTypeModel, PokemonType>("type", PokemonTypeModel);
-      pokemonTypes.forEach(pt => {
-        console.log(`${pt}`);
-      });
+      // pokemonTypes.forEach(pt => {
+      //   console.log(`${pt}`);
+      // });
       return pokemonTypes
     } catch (ex: any) {
       console.log(ex.message);
@@ -19,11 +19,12 @@ export default class PokemonTypeController {
     }
   }
 
-  static async showPokemonType(type: string) : Promise<string> {
+  static async showPokemonType(type: string) : Promise<PokemonTypeModel> {
     try {
       const pokemonType = await PokemonApi.getOne<PokemonTypeModel, PokemonType>("type", type, PokemonTypeModel);
       console.log(`${pokemonType}`);
-      return pokemonType.getRandomPokemonName();
+      //return pokemonType.getRandomPokemonName();
+      return pokemonType
     } catch (ex: any) {    
       console.log(ex.message);
       throw new Error('Something wrong happened in getPokemonType');
