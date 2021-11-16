@@ -7,14 +7,50 @@ import PokemonTypeModel from '../models/PokemonTypeModel';
 
 axios.defaults.baseURL = 'https://pokeapi.co/api/v2';
 
-export default class PokemonTypeApi {
+export default class PokemonApi {
+
+  static async getAll<Model, Interface>(resourceName: string, constr: { new(inter: Interface): Model }): Promise<Model[]> {
+    try {
+      const response = await axios.get(`/${resourceName}`);
+      const resources: Resource[] = response.data.results;
+      const model = Promise.all<Model>(resources.map(async(res: Resource) => {
+        const inter = await this.getResourceFromUrl<Interface>(res.url);
+        return new constr(inter);
+      }));
+
+      return model;
+    } catch(ex) {
+      throw new Error('Something wrong happened in getAll');
+    }
+  }
+					
+  static async getOne<Model, Interface>(resourceName: string, name: string, constr: new(inter: Interface) => Model): Promise<Model> {
+    try {
+      const response = await axios.get(`/${resourceName}/${name}/`);
+      const inter: Interface = response.data;
+      const model = new constr(inter);
+
+      return model;
+    } catch(ex) {
+      throw new Error('Something wrong happened in getOne');
+    }
+  }
+
+  private static async getResourceFromUrl<Interface>(url: string) : Promise<Interface> {
+    try {
+      const response = await axios.get(url);
+      return response.data;    
+    } catch (error) {
+      throw new Error('Api call failed')
+    }
+  }
 
   static async getAllPokemonTypes(): Promise<PokemonTypeModel[]> {
     try {
       const response = await axios.get('/type');
       const pokemonTypesBase: Resource[] = response.data.results;
       const pokemonTypes = Promise.all<PokemonTypeModel>(pokemonTypesBase.map(async(ptb: Resource) => {
-        const pt = await this.getPokemonTypeFromUrl(ptb.url);
+        const pt = await this.getResourceFromUrl<PokemonType>(ptb.url);
         return new PokemonTypeModel(pt);
       }));
 
@@ -41,7 +77,7 @@ export default class PokemonTypeApi {
       const response = await axios.get('/pokemon');
       const pokemonsBase: Resource[] = response.data.results;
       const pokemonTypes = Promise.all<PokemonModel>(pokemonsBase.map(async(ptb: Resource) => {
-        const pt = await this.getPokemonFromUrl(ptb.url);
+        const pt = await this.getResourceFromUrl<Pokemon>(ptb.url);
         return new PokemonModel(pt);
       }));
 
@@ -60,24 +96,6 @@ export default class PokemonTypeApi {
       return pokemonModel;
     } catch(ex) {
       throw new Error('Something wrong happened in getPokemon');
-    }
-  }
-
-  private static async getPokemonTypeFromUrl(url: string) : Promise<PokemonType> {
-    try {
-      const response = await axios.get(url);
-      return response.data;    
-    } catch (error) {
-      throw new Error('Api call failed')
-    }
-  }
-
-  private static async getPokemonFromUrl(url: string) : Promise<Pokemon> {
-    try {
-      const response = await axios.get(url);
-      return response.data;    
-    } catch (error) {
-      throw new Error('Api call failed')
     }
   }
 
