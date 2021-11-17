@@ -166,7 +166,7 @@ export default interface Pokemon {
     order: number;
     past_types: any[];
     species: Species;
-    sprites: Sprites;
+    sprites?: Sprites;
     stats: Stat[];
     types: Type[];
     weight: number;
