@@ -39,6 +39,6 @@
     "include": ["src/**/*.ts"],
     "exclude": ["src/index.ts"],
     "check-coverage": true,
-    "reporter": ["html"]
+    "reporter": ["html", "cobertura"]
   }
 }
