@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "watch": "nodemon src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "test:coverage": "nyc npm run test"
   },
   "keywords": [],
   "author": "",
