@@ -1,14 +1,14 @@
-import path from "path"
-const express = require('express')
-const app = express()
-const port = 8080
+import path from 'path';
+const express = require('express');
+const app = express();
+const port = 8080;
 
-var pokemonRoute = require('./routes/pokemon')
-var typeRoute = require('./routes/type')
+const pokemonRoute = require('./routes/pokemon');
+const typeRoute = require('./routes/type');
 
 app.get('/', function (req: any, res: any) {
-  res.sendFile(path.join(__dirname, '/views/index.html'))
-})
+  res.sendFile(path.join(__dirname, '/views/index.html'));
+});
 
 app.use('/api/v2/pokemon', pokemonRoute);
 app.use('/api/v2/type', typeRoute);

@@ -72,7 +72,7 @@ export interface Pokemon {
   slot: number;
 }
 
-export default interface PokemonType {
+export interface PokemonType {
   damage_relations: DamageRelations;
   game_indices: GameIndice[];
   generation: Generation2;
