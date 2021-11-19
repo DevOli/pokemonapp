@@ -36,6 +36,7 @@ stages:
         - script: |
             npm run test:coverage
           displayName: 'Run tests and generate coverage'
+          continueOnError: true
 
         - task: PublishTestResults@2
           inputs:
