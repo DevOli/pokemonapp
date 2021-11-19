@@ -10,7 +10,8 @@
     "test:coverage": "nyc npm run test -- --reporter mocha-junit-reporter",
     "build": "npx tsc",
     "postbuild": "npx ts-node ./tools/build",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint 'src/**/*.ts'",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -38,7 +39,8 @@
     "sinon": "^12.0.1",
     "source-map-support": "^0.5.20",
     "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "husky": "^7.0.0"
   },
   "dependencies": {
     "axios": "^0.24.0",

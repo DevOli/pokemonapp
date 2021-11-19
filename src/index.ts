@@ -1,10 +1,10 @@
 import path from 'path';
-const express = require('express');
+import express from 'express';
 const app = express();
 const port = 8080;
 
-const pokemonRoute = require('./routes/pokemon');
-const typeRoute = require('./routes/type');
+import pokemonRoute from './routes/pokemon';
+import typeRoute from './routes/type';
 
 app.get('/', function (req: any, res: any) {
   res.sendFile(path.join(__dirname, '/views/index.html'));
