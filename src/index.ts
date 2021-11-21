@@ -1,8 +1,7 @@
 import express from 'express';
+import indexRoute from './routes/index';
 const app = express();
 const port = 8080;
-
-import indexRoute from './routes/index';
 
 app.use('/', indexRoute);
 
