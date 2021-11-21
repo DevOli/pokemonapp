@@ -28,4 +28,4 @@ router.get('/:pokemon', async function (req: any, res: any) {
   }
 });
 
-module.exports = router;
+export = router;
