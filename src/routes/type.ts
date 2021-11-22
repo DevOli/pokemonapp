@@ -1,4 +1,5 @@
 import PokemonTypeController from '../controllers/PokemonTypeController';
+import { RequestModel } from '../models/RequestModel';
 
 import express from 'express';
 const router = express.Router();
