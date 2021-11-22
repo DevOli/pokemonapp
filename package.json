@@ -58,7 +58,8 @@
     "exclude": [
       "src/index.ts",
       "src/api/*",
-      "src/routes/*"
+      "src/routes/*",
+      "src/repositories/*"
     ],
     "reporter": [
       "html",
