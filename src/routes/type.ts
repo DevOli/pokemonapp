@@ -1,12 +1,14 @@
 import PokemonTypeController from '../controllers/PokemonTypeController';
-import { RequestModel } from '../models/RequestModel';
-
+import RequestRepo from '../repositories/RequestsRepo';
 import express from 'express';
 const router = express.Router();
-
+const requestRepo = new RequestRepo();
 // middleware that is specific to this router
 router.use(function timeLog(req: any, res: any, next: any) {
-  console.log('Time: ', Date.now());
+  requestRepo
+    .create(req.originalUrl, req.ip)
+    .then((request) => console.log('Saved in DB:', request))
+    .catch((err) => console.log(err));
   next();
 });
 // all types

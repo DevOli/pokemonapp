@@ -2,25 +2,17 @@ import express from 'express';
 import path from 'path';
 import pokemonRoute from './pokemon';
 import typeRoute from './type';
-import { RequestModel } from '../models/RequestModel';
+import RequestRepo from '../repositories/RequestsRepo';
+
+const requestRepo = new RequestRepo();
 
 const router = express.Router();
 
 router.get('/', function (req: any, res: any) {
-  const newRequest = new RequestModel({
-    name: req.path,
-    date: new Date(),
-    ip: req.ip
-  });
-
-  newRequest.save((error: any, createdRequest: any) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Saved');
-    }
-  });
-
+  requestRepo
+    .create(req.originalUrl, req.ip)
+    .then((request) => console.log('Saved in DB:', request))
+    .catch((err) => console.log(err));
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
