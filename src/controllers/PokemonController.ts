@@ -20,7 +20,7 @@ export default class PokemonController {
   static async showPokemon(name: string): Promise<PokemonModel> {
     try {
       const pokemon = await PokemonApi.getOne<PokemonModel, Pokemon>('pokemon', name, PokemonModel);
-      console.log(`${pokemon}`);
+      //console.log(`${pokemon}`);
       return pokemon;
     } catch (ex: any) {
       console.error(ex);

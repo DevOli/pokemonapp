@@ -28,7 +28,7 @@ export default class PokemonTypeController {
         type,
         PokemonTypeModel
       );
-      console.log(`${pokemonType}`);
+      //console.log(`${pokemonType}`);
       //return pokemonType.getRandomPokemonName();
       return pokemonType;
     } catch (ex: any) {
